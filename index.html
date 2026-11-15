@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLACK MOBILE — Играй в CRMP на телефоне</title>
+    <title>BLACK MOBILE — Онлайн-игра про Россию</title>
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #09090b;
-            --bg-card: rgba(20, 20, 24, 0.78);
-            --accent: #ff2a2a;
-            --accent-glow: rgba(255, 42, 42, 0.45);
-            --accent-orange: #ff5500;
+            --bg-main: #080b12;
+            --bg-card: #101522;
+            --accent-red: #ff3b30;
+            --accent-coral: #ff5e57;
+            --accent-green: #10b981;
             --text-main: #ffffff;
-            --text-muted: #a1a1aa;
-            --border-glass: rgba(255, 255, 255, 0.08);
+            --text-muted: #8e98b0;
+            --border-subtle: rgba(255, 255, 255, 0.08);
         }
 
         * {
@@ -31,20 +31,18 @@
         }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--bg-main);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             line-height: 1.5;
-            background-image: 
-                radial-gradient(circle at 15% 10%, rgba(255, 42, 42, 0.15), transparent 35%),
-                radial-gradient(circle at 85% 40%, rgba(255, 85, 0, 0.09), transparent 40%);
+            padding-bottom: 95px;
         }
 
         #preloader {
             position: fixed;
             inset: 0;
-            background: #070709;
+            background: #06080e;
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -59,30 +57,27 @@
         }
 
         .loader-logo {
-            width: 82px;
-            height: 82px;
-            border-radius: 20px;
+            width: 84px;
+            height: 84px;
+            border-radius: 22px;
             object-fit: cover;
-            box-shadow: 0 0 35px var(--accent-glow);
+            box-shadow: 0 0 40px rgba(255, 59, 48, 0.5);
             margin-bottom: 18px;
-            animation: pulseLogo 1.4s infinite alternate;
+            animation: pulseLogo 1.3s infinite alternate;
         }
 
         .loader-title {
             font-family: 'Unbounded', sans-serif;
             font-weight: 900;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             letter-spacing: 2px;
             margin-bottom: 16px;
-            background: linear-gradient(90deg, #fff, #ff4d4d);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .loader-bar-wrap {
             width: 210px;
-            height: 5px;
-            background: rgba(255,255,255,0.1);
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             overflow: hidden;
         }
@@ -90,99 +85,86 @@
         .loader-bar {
             width: 0%;
             height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--accent-orange));
-            box-shadow: 0 0 12px var(--accent);
-            border-radius: 10px;
-            animation: loadProgress 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-coral));
+            box-shadow: 0 0 14px var(--accent-red);
+            animation: loadProgress 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         @keyframes loadProgress {
             0% { width: 0%; }
-            60% { width: 75%; }
             100% { width: 100%; }
         }
 
         @keyframes pulseLogo {
-            from { transform: scale(0.96); }
-            to { transform: scale(1.04); }
+            from { transform: scale(0.95); }
+            to { transform: scale(1.05); }
         }
 
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(9, 9, 11, 0.82);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-glass);
-            padding: 14px 20px;
-        }
-
-        .nav-container {
-            max-width: 560px;
-            margin: 0 auto;
+        .top-nav {
+            position: fixed;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 92%;
+            max-width: 500px;
+            z-index: 200;
+            background: rgba(13, 18, 29, 0.82);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 18px;
+            padding: 10px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .header-logo {
+        .brand-box {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
         }
 
-        .header-logo img {
-            width: 38px;
-            height: 38px;
+        .brand-box img {
+            width: 36px;
+            height: 36px;
             border-radius: 10px;
             object-fit: cover;
-            box-shadow: 0 0 12px rgba(255, 42, 42, 0.35);
         }
 
-        .project-title {
+        .brand-text {
             font-family: 'Unbounded', sans-serif;
-            font-size: 16px;
-            font-weight: 800;
+            font-size: 12px;
+            font-weight: 900;
+            line-height: 1.15;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #ffffff;
+            color: #fff;
         }
 
-        .project-title span {
-            color: var(--accent);
+        .brand-text span {
+            display: block;
+            color: var(--accent-coral);
         }
 
-        .header-btn {
-            border: 1.5px solid var(--accent);
-            background: rgba(255, 42, 42, 0.12);
-            color: #ffffff;
-            padding: 9px 15px;
-            border-radius: 10px;
+        .menu-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: #fff;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-decoration: none;
-            font-family: 'Unbounded', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        .header-btn:hover {
-            background: var(--accent);
-            box-shadow: 0 0 18px var(--accent-glow);
-        }
-
-        .content-wrapper {
-            max-width: 500px;
-            width: 92%;
-            margin: 0 auto;
-            padding: 20px 0 60px;
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(26px);
+            transform: translateY(28px);
             transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -191,81 +173,58 @@
             transform: translateY(0);
         }
 
-        .main-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-glass);
-            border-radius: 26px;
-            padding: 18px;
-            margin-bottom: 20px;
-            text-align: center;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 20px 45px rgba(0,0,0,0.65);
+        .hero-section {
+            position: relative;
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 110px 20px 40px;
+            max-width: 540px;
+            margin: 0 auto;
+            overflow: hidden;
         }
 
-        .project-image {
-            width: 100%;
-            height: auto;
-            border-radius: 18px;
-            margin-bottom: 18px;
-            border: 1px solid rgba(255,255,255,0.08);
-            display: block;
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('banner.jpg') center top / cover no-repeat;
+            z-index: -2;
+            filter: brightness(0.65);
         }
 
-        .download-btn {
-            display: block;
-            background: linear-gradient(135deg, #ff2a2a 0%, #b80000 100%);
-            color: #ffffff;
-            padding: 17px 20px;
-            border-radius: 14px;
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(8,11,18,0.45) 0%, rgba(8,11,18,0.75) 55%, #080b12 100%);
+            z-index: -1;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.14);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #34d399;
             font-family: 'Unbounded', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 7px 14px;
+            border-radius: 50px;
+            margin-bottom: 18px;
+            width: fit-content;
             text-transform: uppercase;
-            font-weight: 800;
-            font-size: 14px;
-            text-decoration: none;
-            letter-spacing: 0.5px;
-            box-shadow: 0 8px 25px var(--accent-glow);
-            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .download-btn:active {
-            transform: scale(0.98);
-        }
-
-        .apk-desc {
-            margin-top: 14px;
-            color: var(--text-muted);
-            font-size: 13px;
-        }
-
-        .server-card {
-            background: linear-gradient(145deg, rgba(28, 16, 16, 0.9), rgba(16, 16, 20, 0.9));
-            border: 1px solid rgba(255, 42, 42, 0.35);
-            border-radius: 22px;
-            padding: 18px 20px;
-            margin-bottom: 34px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.45);
-        }
-
-        .server-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .server-name-wrap {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            background: #22c55e;
+        .hero-pill-dot {
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
-            box-shadow: 0 0 12px #22c55e;
-            animation: blink 1.5s infinite;
+            background: var(--accent-green);
+            box-shadow: 0 0 10px var(--accent-green);
+            animation: blink 1.4s infinite;
         }
 
         @keyframes blink {
@@ -273,121 +232,291 @@
             50% { opacity: 0.35; }
         }
 
-        .server-title {
+        .hero-title {
             font-family: 'Unbounded', sans-serif;
-            font-weight: 800;
+            font-size: 40px;
+            font-weight: 900;
+            line-height: 1.05;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .hero-title .white {
+            display: block;
+            color: #ffffff;
+        }
+
+        .hero-title .coral {
+            display: block;
+            color: var(--accent-coral);
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
             font-size: 15px;
+            line-height: 1.55;
+            margin-bottom: 26px;
         }
 
-        .badge-x2 {
-            background: linear-gradient(90deg, #ff5500, #ff2a2a);
+        .hero-cta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #4b1216 0%, #2a0a0d 100%);
+            border: 1px solid rgba(255, 94, 87, 0.4);
+            color: #ffffff;
+            padding: 20px 24px;
+            border-radius: 18px;
             font-family: 'Unbounded', sans-serif;
-            font-size: 11px;
+            font-size: 14px;
             font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 8px;
+            text-transform: uppercase;
+            text-decoration: none;
+            box-shadow: 0 12px 35px rgba(255, 59, 48, 0.25);
+            transition: transform 0.2s;
         }
 
-        .online-stats {
+        .hero-cta:active {
+            transform: scale(0.98);
+        }
+
+        .container {
+            max-width: 540px;
+            margin: 0 auto;
+            padding: 0 18px;
+        }
+
+        .server-mega-card {
+            background: linear-gradient(160deg, #131a2a 0%, #0c101b 100%);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            border-radius: 26px;
+            padding: 24px 22px;
+            margin: 10px 0 42px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(16, 185, 129, 0.08);
+        }
+
+        .server-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 10px;
+            margin-bottom: 18px;
         }
 
-        .online-stats strong {
+        .server-tag {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-coral);
+            letter-spacing: 1px;
+        }
+
+        .server-bonus-badge {
+            background: rgba(255, 94, 87, 0.15);
+            border: 1px solid rgba(255, 94, 87, 0.4);
+            color: var(--accent-coral);
+            font-family: 'Unbounded', sans-serif;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 5px 10px;
+            border-radius: 8px;
+        }
+
+        .server-main-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 18px;
+        }
+
+        .server-name {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.1;
+        }
+
+        .server-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .online-big-box {
+            text-align: right;
+        }
+
+        .online-big-num {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1;
+        }
+
+        .online-big-max {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 12px;
+            color: var(--accent-green);
+            margin-top: 4px;
+        }
+
+        .green-track-wrap {
+            position: relative;
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+
+        .green-track-fill {
+            position: relative;
+            height: 100%;
+            width: 46%;
+            background: linear-gradient(90deg, #059669, #34d399);
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+            transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .green-track-knob {
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #34d399;
+            border: 3px solid #080b12;
+            box-shadow: 0 0 14px #10b981;
+        }
+
+        #samp-rating-hidden {
+            display: none;
+        }
+
+        .section-kicker {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-coral);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .section-heading {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+
+        .outline-text {
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--accent-coral);
+        }
+
+        .section-lead {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 12px;
+            scrollbar-width: none;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .slide-card {
+            flex: 0 0 84%;
+            scroll-snap-align: start;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(8, 11, 18, 0.82);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-subtle);
             color: #fff;
             font-family: 'Unbounded', sans-serif;
-            font-size: 13px;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 50px;
+            z-index: 2;
         }
 
-        #samp-rating-raw a {
-            color: #ffffff !important;
-            text-decoration: none !important;
-            font-family: 'Unbounded', sans-serif !important;
-            font-weight: 700 !important;
-            font-size: 13px !important;
-        }
-
-        .progress-bg {
+        .slide-card img {
             width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 15%;
-            background: linear-gradient(90deg, #ff5500, #ff2a2a);
-            border-radius: 10px;
-            transition: width 0.8s ease;
-        }
-
-        .features-title {
-            font-family: 'Unbounded', sans-serif;
-            background: linear-gradient(90deg, #ff3333, #ff7733);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 19px;
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 0.5px;
-            margin-bottom: 22px;
-            font-weight: 900;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-glass);
-            border-radius: 22px;
-            padding: 15px;
-            margin-bottom: 18px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.45);
-        }
-
-        .feature-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.06);
-            margin-bottom: 12px;
+            height: 220px;
+            object-fit: cover;
             display: block;
         }
 
-        .feature-card p {
-            color: #e4e4e7;
-            font-size: 14px;
-            line-height: 1.55;
-            padding: 0 4px;
+        .slide-body {
+            padding: 18px;
         }
 
-        .feature-card p strong {
-            color: #ff4444;
+        .slide-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: #fff;
         }
 
-        .faq-section {
-            margin: 32px 0;
+        .slide-text {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .slide-text strong {
+            color: var(--accent-coral);
+        }
+
+        .swipe-hint {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin: 8px 0 42px;
         }
 
         .faq-item {
             background: var(--bg-card);
-            border: 1px solid var(--border-glass);
-            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 18px;
             margin-bottom: 12px;
             overflow: hidden;
         }
 
         .faq-trigger {
             width: 100%;
-            padding: 16px 18px;
+            padding: 18px;
             background: none;
             border: none;
-            color: #ffffff;
+            color: #fff;
             font-family: 'Inter', sans-serif;
             font-size: 14.5px;
             font-weight: 600;
@@ -400,126 +529,167 @@
         }
 
         .faq-arrow {
-            color: var(--accent);
-            font-size: 14px;
+            color: var(--accent-coral);
             transition: transform 0.3s ease;
         }
 
         .faq-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.35s ease-out, padding 0.35s ease;
+            transition: max-height 0.35s ease, padding 0.35s ease;
             padding: 0 18px;
             color: var(--text-muted);
             font-size: 13.5px;
-            line-height: 1.55;
         }
 
-        .final-download-zone {
-            background: linear-gradient(180deg, rgba(35, 12, 12, 0.9) 0%, rgba(15, 15, 18, 0.95) 100%);
-            border: 1.5px solid var(--accent);
-            border-radius: 26px;
-            padding: 28px 20px;
-            margin: 28px 0;
-            text-align: center;
-            box-shadow: 0 0 35px rgba(255, 42, 42, 0.18);
-            scroll-margin-top: 85px;
+        .social-card {
+            display: block;
+            background: linear-gradient(145deg, #121929 0%, #0d121f 100%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 22px;
+            padding: 20px;
+            margin-bottom: 16px;
+            text-decoration: none;
+            color: #fff;
         }
 
-        .final-title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 17px;
-            font-weight: 900;
-            text-transform: uppercase;
-            color: #ffffff;
+        .social-top {
+            display: flex;
+            align-items: center;
+            gap: 14px;
             margin-bottom: 18px;
         }
 
-        .action-btn {
-            display: block;
-            background: linear-gradient(135deg, #ff2a2a 0%, #aa0000 100%);
-            color: #ffffff;
-            padding: 18px 20px;
+        .social-icon {
+            width: 48px;
+            height: 48px;
             border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .icon-tg {
+            background: rgba(36, 129, 204, 0.2);
+            color: #38bdf8;
+        }
+
+        .icon-donate {
+            background: rgba(255, 94, 87, 0.2);
+            color: var(--accent-coral);
+        }
+
+        .social-name {
             font-family: 'Unbounded', sans-serif;
-            text-transform: uppercase;
-            font-weight: 800;
-            font-size: 14px;
-            text-decoration: none;
-            box-shadow: 0 0 25px var(--accent-glow);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 15px rgba(255, 42, 42, 0.4); }
-            50% { box-shadow: 0 0 30px rgba(255, 42, 42, 0.75); }
-            100% { box-shadow: 0 0 15px rgba(255, 42, 42, 0.4); }
-        }
-
-        .security-badge {
-            display: block;
-            margin-top: 12px;
-            font-size: 12px;
-            color: #888888;
-        }
-
-        .info-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border-glass);
-            border-radius: 24px;
-            padding: 24px 20px;
-            margin-bottom: 20px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .info-section h2 {
-            font-family: 'Unbounded', sans-serif;
-            color: #ff4444;
             font-size: 16px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
             font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .info-section p {
+        .official-tag {
+            font-size: 9px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 3px 7px;
+            border-radius: 6px;
             color: var(--text-muted);
-            font-size: 13.5px;
-            line-height: 1.5;
-            margin-bottom: 18px;
         }
 
-        .game-tg-btn {
-            display: block;
-            width: 100%;
-            color: #ffffff;
-            padding: 16px 18px;
-            border-radius: 14px;
-            font-family: 'Unbounded', sans-serif;
-            text-transform: uppercase;
-            font-weight: 800;
+        .social-sub {
             font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        .social-link-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 12px;
+        }
+
+        .social-link-row span {
+            color: var(--accent-coral);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 94%;
+            max-width: 500px;
+            background: rgba(13, 18, 29, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 22px;
+            padding: 10px 12px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 300;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.75);
+        }
+
+        .bnav-item {
             text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
 
-        .game-tg-btn:active {
-            transform: scale(0.98);
+        .bnav-item.active {
+            color: #fff;
         }
 
-        .btn-donate {
-            background: linear-gradient(135deg, #ff5500 0%, #cc1100 100%);
-            box-shadow: 0 6px 20px rgba(204, 17, 0, 0.4);
+        .bnav-icon {
+            font-size: 18px;
         }
 
-        .btn-channel {
-            background: linear-gradient(135deg, #2481cc 0%, #155799 100%);
-            box-shadow: 0 6px 20px rgba(36, 129, 204, 0.4);
+        .bnav-bc-wrap {
+            position: relative;
+            top: -16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .bnav-bc-circle {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #ff4d4d, #990000);
+            border: 3px solid #080b12;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 13px;
+            font-weight: 900;
+            color: #fff;
+            box-shadow: 0 0 22px rgba(255, 59, 48, 0.65);
+            margin-bottom: 4px;
         }
     </style>
 </head>
 
-    <body>
+<body>
 
     <div id="preloader">
         <img src="logo.jpg" alt="BLACK MOBILE" class="loader-logo">
@@ -529,107 +699,178 @@
         </div>
     </div>
 
-    <header>
-        <div class="nav-container">
-            <a href="#" class="header-logo">
-                <img src="logo.jpg" alt="Logo">
-                <div class="project-title">Black <span>Mobile</span></div>
-            </a>
-            <a href="#download-zone" class="header-btn">Скачать игру</a>
+    <nav class="top-nav">
+        <a href="#" class="brand-box">
+            <img src="logo.jpg" alt="Logo">
+            <div class="brand-text">BLACK <span>MOBILE</span></div>
+        </a>
+        <a href="#download-zone" class="menu-toggle" title="Скачать игру">⬇</a>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-pill">
+            <span class="hero-pill-dot"></span>
+            РОЛЕВАЯ ОНЛАЙН-ИГРА
         </div>
-    </header>
 
-    <div class="content-wrapper">
+        <h1 class="hero-title">
+            <span class="white">BLACK</span>
+            <span class="coral">MOBILE</span>
+        </h1>
 
-        <div class="main-container reveal">
-            <img src="banner.jpg" alt="Black Mobile Banner" class="project-image">
-            <a href="#download-zone" class="download-btn">Скачать игру</a>
-            <div class="apk-desc">Самая последняя и актуальная версия игры BLACK MOBILE</div>
-        </div>
+        <p class="hero-desc">
+            Становись тем, кем хочешь без ограничений. Получай стартовый бонус <strong>50 000 000 ₽</strong> и <strong>5 000 BC</strong> при входе и начинай свою жизнь на проекте!
+        </p>
 
-        <div class="server-card reveal">
-            <div class="server-top">
-                <div class="server-name-wrap">
-                    <span class="status-dot"></span>
-                    <span class="server-title">СЕРВЕР: CHILLI</span>
+        <a href="#download-zone" class="hero-cta">
+            <span>НАЧАТЬ ИГРАТЬ</span>
+            <span>↗</span>
+        </a>
+    </section>
+
+    <div class="container">
+
+        <div class="server-mega-card reveal">
+            <div class="server-header">
+                <span class="server-tag">● МОНИТОРИНГ СЕРВЕРА</span>
+                <span class="server-bonus-badge">БОНУС X2</span>
+            </div>
+
+            <div class="server-main-row">
+                <div>
+                    <div class="server-name">CHILLI</div>
+                    <div class="server-sub">Основной игровой сервер</div>
                 </div>
-                <span class="badge-x2">БОНУС x2</span>
+                <div class="online-big-box">
+                    <div class="online-big-num" id="online-number">23</div>
+                    <div class="online-big-max">из <span id="max-number">50</span> игроков</div>
+                </div>
             </div>
-            <div class="online-stats">
-                <span>Статус: <strong style="color:#22c55e;">Онлайн</strong></span>
-                <span id="samp-rating-raw">
-                    <script src="https://samp-rating.ru"></script>
-                </span>
+
+            <div class="green-track-wrap">
+                <div class="green-track-fill" id="green-bar">
+                    <div class="green-track-knob"></div>
+                </div>
             </div>
-            <div class="progress-bg">
-                <div class="progress-fill" id="online-bar"></div>
+
+            <div id="samp-rating-hidden">
+                <script src="https://samp-rating.ru"></script>
             </div>
         </div>
 
-        <section class="features-section">
-            <div class="features-title reveal">Особенности нашего сервера</div>
-            
-            <div class="feature-card reveal">
-                <img src="IMG_20261019_175344.jpg" alt="Стартовый Бонус">
-                <p>🚀 <strong>Бешеный start:</strong> При первом же входе в игру на твой баланс начисляется сочный стартовый бонус в размере <strong>50 000 000 рублей</strong>! Забудь про бедность и нищету.</p>
-            </div>
+        <section id="features" class="reveal">
+            <div class="section-kicker">01 • О ПРОЕКТЕ</div>
+            <h2 class="section-heading">НАША <span class="outline-text">ИГРА</span></h2>
+            <p class="section-lead">Онлайн-игра про Россию: автомобили, работа и общение с другими игроками. Выбирай занятие и развивай персонажа.</p>
 
-            <div class="feature-card reveal">
-                <img src="scr2.jpg" alt="Блек Коины">
-                <p>💎 <strong>Донат в подарок:</strong> Помимо миллионов рублей, каждый новичок получает на счет <strong>5 000 Black Coins</strong>! Покупай любые уникальные услуги и крутые привилегии сразу.</p>
-            </div>
+            <div class="carousel-track">
+                <div class="slide-card">
+                    <span class="slide-badge">БОНУС 01</span>
+                    <img src="IMG_20261019_175344.jpg" alt="Старт">
+                    <div class="slide-body">
+                        <div class="slide-title">БЕШЕНЫЙ START</div>
+                        <p class="slide-text">При первом входе на баланс начисляется <strong>50 000 000 рублей</strong>! Забудь про бедность.</p>
+                    </div>
+                </div>
 
-            <div class="feature-card reveal">
-                <img src="scr3.jpg" alt="Black Pass">
-                <p>🏆 <strong>Новейший Black Pass:</strong> Проходи уровни и забирай топовые награды! У нас работает самый актуальный и обновленный сезонный пропуск с кучей подарков.</p>
-            </div>
+                <div class="slide-card">
+                    <span class="slide-badge">БОНУС 02</span>
+                    <img src="scr2.jpg" alt="Донат">
+                    <div class="slide-body">
+                        <div class="slide-title">ДОНАТ В ПОДАРОК</div>
+                        <p class="slide-text">Каждый новичок получает <strong>5 000 Black Coins</strong>! Покупай уникальные привилегии сразу.</p>
+                    </div>
+                </div>
 
-            <div class="feature-card reveal">
-                <img src="scr4.jpg" alt="Календарь">
-                <p>📅 <strong>Календарь событий:</strong> Заходи на сервер каждый день, выполняй простые квесты и забирай крутые ежедневные призы в нашей рабочей системе ивентов.</p>
-            </div>
+                <div class="slide-card">
+                    <span class="slide-badge">СЕЗОН 03</span>
+                    <img src="scr3.jpg" alt="Black Pass">
+                    <div class="slide-body">
+                        <div class="slide-title">НОВЕЙШИЙ BLACK PASS</div>
+                        <p class="slide-text">Проходи уровни и забирай топовые награды в обновлённом сезонном пропуске.</p>
+                    </div>
+                </div>
 
-            <div class="feature-card reveal">
-                <img src="scr5.jpg" alt="Система Reward">
-                <p>📦 <strong>Удобный склад наград:</strong> На сервере полностью реализована вкладка <strong>Reward</strong>. Все заработанные призы и бонусы бережно хранятся там, пока ты их не заберешь.</p>
-            </div>
+                <div class="slide-card">
+                    <span class="slide-badge">ИВЕНТЫ 04</span>
+                    <img src="scr4.jpg" alt="Календарь">
+                    <div class="slide-body">
+                        <div class="slide-title">КАЛЕНДАРЬ СОБЫТИЙ</div>
+                        <p class="slide-text">Заходи каждый день, выполняй простые квесты и забирай ежедневные призы.</p>
+                    </div>
+                </div>
 
-                        <div class="feature-card reveal">
-                <img src="scr6.jpg" alt="Кейсы">
-                <p>🔥 <strong>Эксклюзивные кейсы:</strong> Испытай свою удачу! На сервере доступны абсолютно все самые новые кейсы и сундуки из последних игровых событий.</p>
-            </div>
+                <div class="slide-card">
+                    <span class="slide-badge">СКЛАД 05</span>
+                    <img src="scr5.jpg" alt="Reward">
+                    <div class="slide-body">
+                        <div class="slide-title">СИСТЕМА REWARD</div>
+                        <p class="slide-text">Все заработанные призы и бонусы бережно хранятся во вкладке <strong>Reward</strong>.</p>
+                    </div>
+                </div>
 
-            <div class="feature-card reveal">
-                <img src="scr7.jpg" alt="Автопарк">
-                <p>🏎️ <strong>Заряженный автопарк:</strong> Наслаждайся ездой на самых свежих и дорогих машинах! Проработанная физика, бешеные скорости и легендарный стиль.</p>
-            </div>
+                <div class="slide-card">
+                    <span class="slide-badge">УДАЧА 06</span>
+                    <img src="scr6.jpg" alt="Кейсы">
+                    <div class="slide-body">
+                        <div class="slide-title">ЭКСКЛЮЗИВНЫЕ КЕЙСЫ</div>
+                        <p class="slide-text">На сервере доступны абсолютно все самые новые кейсы и сундуки из последних событий.</p>
+                    </div>
+                </div>
 
-            <div class="feature-card reveal">
-                <img src="scr8.jpg" alt="Фракции">
-                <p>👔 <strong>Свобода выбора фракции:</strong> Стань грозой криминального мира или защищай закон в гос. структурах. Полноценная рабочая система рангов и карьерного роста.</p>
-            </div>
+                <div class="slide-card">
+                    <span class="slide-badge">ТРАНСПОРТ 07</span>
+                    <img src="scr7.jpg" alt="Автопарк">
+                    <div class="slide-body">
+                        <div class="slide-title">ЗАРЯЖЕННЫЙ АВТОПАРК</div>
+                        <p class="slide-text">Наслаждайся ездой на самых свежих и дорогих машинах с проработанной физикой.</p>
+                    </div>
+                </div>
 
-            <div class="feature-card reveal">
-                <img src="scr9.jpg" alt="Маркетплейс">
-                <p>🏪 <strong>Живой маркетплейс:</strong> У нас работает полноценный <strong>Black Market</strong>! Удобно выставляй свои вещи на продажу или скупай редкие предметы у других игроков.</p>
-            </div>
+                <div class="slide-card">
+                    <span class="slide-badge">ОРГАНИЗАЦИИ 08</span>
+                    <img src="scr8.jpg" alt="Фракции">
+                    <div class="slide-body">
+                        <div class="slide-title">СВОБОДА ФРАКЦИЙ</div>
+                        <p class="slide-text">Стань грозой криминального мира или защищай закон в государственных структурах.</p>
+                    </div>
+                </div>
 
-            <div class="feature-card reveal">
-                <img src="scr10.jpg" alt="Работы">
-                <p>🌊 <strong>Десятки прибыльных работ:</strong> Выбирай любой способ заработка! Устраивайся на классические профессии или отправляйся на морское дно в роли водолаза.</p>
+                <div class="slide-card">
+                    <span class="slide-badge">ТОРГОВЛЯ 09</span>
+                    <img src="scr9.jpg" alt="Маркетплейс">
+                    <div class="slide-body">
+                        <div class="slide-title">BLACK MARKET</div>
+                        <p class="slide-text">Выставляй свои вещи на продажу или скупай редкие предметы у других игроков.</p>
+                    </div>
+                </div>
+
+                <div class="slide-card">
+                    <span class="slide-badge">ПРОФЕССИИ 10</span>
+                    <img src="scr10.jpg" alt="Работы">
+                    <div class="slide-body">
+                        <div class="slide-title">ДЕСЯТКИ РАБОТ</div>
+                        <p class="slide-text">Устраивайся на классические профессии или отправляйся на морское дно в роли водолаза.</p>
+                    </div>
+                </div>
             </div>
+            <div class="swipe-hint">Листай вбок →</div>
         </section>
 
-        <section class="faq-section reveal">
-            <div class="features-title">О проекте (FAQ)</div>
-            
+        <section id="faq" class="reveal" style="margin-bottom: 42px;">
+            <div class="section-kicker">02 • ВОПРОСЫ</div>
+            <h2 class="section-heading">О <span class="outline-text">ПРОЕКТЕ</span></h2>
+
             <div class="faq-item">
                 <button class="faq-trigger" onclick="toggleFaq(this)">
                     <span>❓ Что такое BLACK MOBILE?</span>
                     <span class="faq-arrow">▼</span>
                 </button>
                 <div class="faq-content">
-                    <p><strong>BLACK MOBILE</strong> — это уникальный мобильный игровой мир на базе CRMP на твоем телефоне! Тебя ждет полная свобода действий, продвинутая графика, проработанная карта России, крутые тачки и возможность стать кем угодно — от успешного бизнесмена до авторитета в криминальном мире.</p>
+                    <p style="padding-bottom:16px;"><strong>BLACK MOBILE</strong> — мобильный CRMP-проект с открытым миром, реальными автомобилями, фракциями и высоким стартовым бонусом.</p>
                 </div>
             </div>
 
@@ -639,80 +880,115 @@
                     <span class="faq-arrow">▼</span>
                 </button>
                 <div class="faq-content">
-                    <p>Каждый новый игрок на старте получает жирнейший бонус для легкого и уверенного начала игры: <strong>50 000 000 рублей</strong> на игровой счет и <strong>5 000 Black Coins (BC)</strong>! Этого хватит, чтобы сразу купить топовую тачку и ни в чем себе не отказывать.</p>
+                    <p style="padding-bottom:16px;">Каждый новый игрок получает <strong>50 000 000 рублей</strong> и <strong>5 000 Black Coins (BC)</strong> сразу после регистрации.</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <button class="faq-trigger" onclick="toggleFaq(this)">
-                    <span>🔥 Что интересного есть на сервере?</span>
+                    <span>📱 Как начать играть на сервере CHILLI?</span>
                     <span class="faq-arrow">▼</span>
                 </button>
                 <div class="faq-content">
-                    <p>На нашем проекте полностью реализованы самые трендовые системы: полностью рабочий маркетплейс (<strong>Black Market</strong>) для торговли с другими игроками, продвинутая система хранения наград <strong>Reward</strong>, актуальный ежедневный календарь событий и самый обновленный <strong>Black Pass</strong> с эксклюзивными призами!</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-trigger" onclick="toggleFaq(this)">
-                    <span>💼 Где можно заработать деньги и кем устроиться?</span>
-                    <span class="faq-arrow">▼</span>
-                </button>
-                <div class="faq-content">
-                    <p>Ты можешь выбрать абсолютно любой путь! На сервере доступны десятки прибыльных работ, включая уникальную профессию водолаза для исследования морского дна. Также ты можешь вступить в любую государственную организацию или опасную банду и уверенно поднимать свой ранг по службе.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-trigger" onclick="toggleFaq(this)">
-                    <span>📱 Как начать играть на BLACK MOBILE?</span>
-                    <span class="faq-arrow">▼</span>
-                </button>
-                <div class="faq-content">
-                    <p>Всё максимально просто! 1. Поднимись в самый верх или спустись в самый низ этого сайта и нажмите кнопку <strong>«СКАЧАТЬ APK-ФАЙЛ ИГРЫ»</strong>. 2. Установи лаунчер на свой Android-телефон. 3. Запусти лаунчер, введи свой игровой никнейм и ворвись в игру!</p>
+                    <p style="padding-bottom:16px;">Скачайте APK-файл ниже, установите лаунчер на Android, выберите сервер <strong>CHILLI</strong> и введите свой игровой никнейм.</p>
                 </div>
             </div>
         </section>
 
-        <div id="download-zone" class="final-download-zone reveal">
-            <div class="final-title">Ворвись в игру прямо сейчас!</div>
-            <a href="https://github.com/marssov/launcher_blackmobile/releases/download/v2_/BLACK-MOBILE-1.apk" class="action-btn" download="BLACK-MOBILE-1.apk">СКАЧАТЬ APK-ФАЙЛ ИГРЫ</a>
-            <span class="security-badge">🛡️ Проверено антивирусами. Безопасная установка.</span>
-        </div>
+        <section id="download-zone" class="reveal" style="margin-bottom: 42px;">
+            <div class="section-kicker">03 • УСТАНОВКА</div>
+            <h2 class="section-heading">СКАЧАТЬ <span class="outline-text">ЛАУНЧЕР</span></h2>
+            <p class="section-lead">Актуальная версия клиента для Android. Проверено антивирусами.</p>
 
-        <section id="donate" class="info-section reveal">
-            <h2>Покупка игровой валюты</h2>
-            <p>Хотите приобрести донат или поддержать развитие нашего игрового мира? По всем вопросам донат-услуг обращайтесь напрямую к основателю проекта.</p>
-            <a href="tg://resolve?domain=Magaaa88" class="game-tg-btn btn-donate">КУПИТЬ ИГРОВУЮ ВАЛЮТУ / ДОНАТ</a>
+            <a href="https://github.com" class="hero-cta" download="BLACK-MOBILE-1.apk">
+                <span>СКАЧАТЬ APK-ФАЙЛ ИГРЫ</span>
+                <span>⬇</span>
+            </a>
         </section>
 
-        <section id="contacts" class="info-section reveal">
-            <h2>Наш Telegram-канал</h2>
-            <p>Подписывайтесь на наш канал, чтобы первыми узнавать обо всех обновлениях, акциях и новостях проекта!</p>
-            <a href="tg://resolve?domain=Black_Mobilez" class="game-tg-btn btn-channel">ПОДПИСАТЬСЯ</a>
+        <section id="socials" class="reveal">
+            <div class="section-kicker">04 • СООБЩЕСТВО</div>
+            <h2 class="section-heading">СОЦИАЛЬНЫЕ <span class="outline-text">СЕТИ</span></h2>
+            <p class="section-lead">Новости проекта, покупка игровой валюты и общение с игроками.</p>
+
+            <a href="tg://resolve?domain=Black_Mobilez" class="social-card">
+                <div class="social-top">
+                    <div class="social-icon icon-tg">✈️</div>
+                    <div>
+                        <div class="social-name">Telegram <span class="official-tag">ОФИЦИАЛЬНЫЙ</span></div>
+                        <div class="social-sub">Анонсы, розыгрыши и новости игры</div>
+                    </div>
+                </div>
+                <div class="social-link-row">
+                    <div>Открыть канал</div>
+                    <span>↗</span>
+                </div>
+            </a>
+
+            <a href="tg://resolve?domain=Magaaa88" class="social-card" id="donate-card">
+                <div class="social-top">
+                    <div class="social-icon icon-donate">💎</div>
+                    <div>
+                        <div class="social-name">Магазин / Донат</div>
+                        <div class="social-sub">Покупка игровой валюты у основателя</div>
+                    </div>
+                </div>
+                <div class="social-link-row">
+                    <div>Написать основателю</div>
+                    <span>↗</span>
+                </div>
+            </a>
         </section>
+
     </div>
+
+    <nav class="bottom-nav">
+        <a href="#" class="bnav-item active">
+            <span class="bnav-icon">🏠</span>
+            <span>Главная</span>
+        </a>
+        <a href="#features" class="bnav-item">
+            <span class="bnav-icon">🎮</span>
+            <span>Об игре</span>
+        </a>
+        <a href="tg://resolve?domain=Magaaa88" class="bnav-bc-wrap">
+            <div class="bnav-bc-circle">BC</div>
+            <span>Донат</span>
+        </a>
+        <a href="#download-zone" class="bnav-item">
+            <span class="bnav-icon">⬇️</span>
+            <span>Скачать</span>
+        </a>
+        <a href="tg://resolve?domain=Black_Mobilez" class="bnav-item">
+            <span class="bnav-icon">✈️</span>
+            <span>Канал</span>
+        </a>
+    </nav>
 
     <script>
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('preloader').classList.add('hidden');
                 revealOnScroll();
-                syncProgressBar();
-            }, 1200);
+                syncChilliOnline();
+            }, 1100);
         });
 
-        function syncProgressBar() {
-            const rawEl = document.getElementById('samp-rating-raw');
-            const bar = document.getElementById('online-bar');
-            if (!rawEl || !bar) return;
+        function syncChilliOnline() {
+            const rawEl = document.getElementById('samp-rating-hidden');
+            const numEl = document.getElementById('online-number');
+            const maxEl = document.getElementById('max-number');
+            const barEl = document.getElementById('green-bar');
+            if (!rawEl || !numEl || !barEl) return;
 
             const match = rawEl.innerText.match(/(\d+)\s*(?:из|\/)\s*(\d+)/i);
             if (match) {
-                const current = parseInt(match[1], 10);
-                const max = parseInt(match[2], 10) || 50;
+                const current = parseInt(match, 10);
+                const max = parseInt(match, 10) || 50;
+                numEl.textContent = current;
+                maxEl.textContent = max;
                 const percent = Math.max(8, Math.min(100, (current / max) * 100));
-                bar.style.width = percent + '%';
+                barEl.style.width = percent + '%';
             }
         }
 
@@ -732,13 +1008,9 @@
             const arrow = button.querySelector('.faq-arrow');
             if (content.style.maxHeight && content.style.maxHeight !== '0px') {
                 content.style.maxHeight = '0px';
-                content.style.paddingTop = '0px';
-                content.style.paddingBottom = '0px';
                 arrow.style.transform = 'rotate(0deg)';
             } else {
-                content.style.maxHeight = content.scrollHeight + 25 + 'px';
-                content.style.paddingTop = '10px';
-                content.style.paddingBottom = '18px';
+                content.style.maxHeight = content.scrollHeight + 20 + 'px';
                 arrow.style.transform = 'rotate(180deg)';
             }
         }
